@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_title">Nommeur de couleur</string>
+    <string name="torch">Flash</string>
+    <string name="rgb_color">R: %1$s"  -  "V: %2$s"  -  "B: %3$s</string>
+    <string name="hsv_color">T: %1$s"  -  "S: %2$s"  -  "V: %3$s</string>
+    <string name="default_rgb_color">R: 255"  -  "V: 255"  -  "B: 255</string>
+    <string name="default_hsv_color">T: 359"  -  "S: 100"  -  "V: 100</string>
+    <string name="red">ROUGE</string>
+    <string name="brown">MARRON</string>
+    <string name="orange">ORANGE</string>
+    <string name="yellow">JAUNE</string>
+    <string name="green">VERT</string>
+    <string name="cyan">CYAN</string>
+    <string name="blue">BLEU</string>
+    <string name="purple">VIOLET</string>
+    <string name="pink">ROSE</string>
+    <string name="black">NOIR</string>
+    <string name="gray">GRIS</string>
+    <string name="white">BLANC</string>
+    <string name="language">FR</string>
+</resources>

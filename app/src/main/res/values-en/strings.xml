@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_title">Color Namer</string>
+    <string name="torch">Torch</string>
+    <string name="rgb_color">R: %1$s"  -  "G: %2$s"  -  "B: %3$s</string>
+    <string name="hsv_color">H: %1$s"  -  "S: %2$s"  -  "V: %3$s</string>
+    <string name="default_rgb_color">R: 255"  -  "G: 255"  -  "B: 255</string>
+    <string name="default_hsv_color">H: 359"  -  "S: 100"  -  "V: 100</string>
+    <string name="red">RED</string>
+    <string name="brown">BROWN</string>
+    <string name="orange">ORANGE</string>
+    <string name="yellow">YELLOW</string>
+    <string name="green">GREEN</string>
+    <string name="cyan">CYAN</string>
+    <string name="blue">BLUE</string>
+    <string name="purple">PURPLE</string>
+    <string name="pink">PINK</string>
+    <string name="black">BLACK</string>
+    <string name="gray">GRAY</string>
+    <string name="white">WHITE</string>
+    <string name="language">EN</string>
+</resources>
