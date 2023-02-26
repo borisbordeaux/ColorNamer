@@ -2,6 +2,7 @@ package com.boris.colornamer.analyzer;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.ImageFormat;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,7 +14,6 @@ import com.boris.colornamer.imageutils.ImageConverter;
 import com.boris.colornamer.model.CompleteColor;
 
 import org.jetbrains.annotations.NotNull;
-import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
@@ -68,15 +68,17 @@ public class ImageAnalyzer implements ImageAnalysis.Analyzer {
      */
     @Override
     public void analyze(@NotNull ImageProxy image) {
+        if (image.getFormat() != ImageFormat.YUV_420_888) {
+            mTextViewColor.setText(mContext.getString(R.string.format_error));
+            image.close();
+            return;
+        }
+
         //avoid creation of Mat every frame
-        if (rgb == null)
-            rgb = new Mat(image.getWidth(), image.getHeight(), CvType.CV_8UC3);
+        if (rgb == null) rgb = new Mat(image.getWidth(), image.getHeight(), CvType.CV_8UC3);
 
         //convert image Yuv to Mat RGB
         ImageConverter.convYUV2RGB(image, rgb);
-
-        //rotate the image because native image is rotated
-        Core.rotate(rgb, rgb, Core.ROTATE_90_CLOCKWISE);
 
         //resize to a square image
         Imgproc.resize(rgb, rgb, SQUARE_SIZE);
@@ -94,8 +96,7 @@ public class ImageAnalyzer implements ImageAnalysis.Analyzer {
         displayColorName();
 
         //avoid creation of Bitmap every frame
-        if (bmp == null)
-            bmp = Bitmap.createBitmap(rgb.cols(), rgb.rows(), Bitmap.Config.ARGB_8888);
+        if (bmp == null) bmp = Bitmap.createBitmap(rgb.cols(), rgb.rows(), Bitmap.Config.ARGB_8888);
 
         //display output image using bmp
         ImageConverter.MatToBitmap(rgb, bmp);
@@ -138,7 +139,7 @@ public class ImageAnalyzer implements ImageAnalysis.Analyzer {
     }
 
     /**
-     * Draws a square ate the center of the image with its exterior contours in black and interior contours in white
+     * Draws a square at the center of the image with its exterior contours in black and interior contours in white
      */
     private void drawMiddleSquareOnImage() {
         int midX = rgb.rows() / 2;

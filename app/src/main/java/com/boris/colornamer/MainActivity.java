@@ -29,10 +29,6 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity implements OnRequestPermissionsResultCallback {
 
-    private ImageView mPreviewView;
-    private TextView mTextViewColor;
-    private TextView mTextViewHSV;
-    private TextView mTextViewRGB;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch mTorchSwitch;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
@@ -54,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements OnRequestPermissi
 
     /**
      * Called at the opening of the app
-     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +76,14 @@ public class MainActivity extends AppCompatActivity implements OnRequestPermissi
         return true;
     }
 
+    /**
+     * @param requestCode  The request code passed in {@link androidx.core.app.ActivityCompat#requestPermissions(
+     *android.app.Activity, String[], int)}
+     * @param permissions  The requested permissions. Never null.
+     * @param grantResults The grant results for the corresponding permissions
+     *                     which is either {@link android.content.pm.PackageManager#PERMISSION_GRANTED}
+     *                     or {@link android.content.pm.PackageManager#PERMISSION_DENIED}. Never null.
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -98,12 +101,12 @@ public class MainActivity extends AppCompatActivity implements OnRequestPermissi
     }
 
     private void init() {
-        mPreviewView = findViewById(R.id.previewView);
+        ImageView mPreviewView = findViewById(R.id.previewView);
         mTorchSwitch = findViewById(R.id.torchSwitch);
         mLocaleSwitch = findViewById(R.id.localeSwitch);
-        mTextViewColor = findViewById(R.id.textColor);
-        mTextViewRGB = findViewById(R.id.textRGB);
-        mTextViewHSV = findViewById(R.id.textHSV);
+        TextView mTextViewColor = findViewById(R.id.textColor);
+        TextView mTextViewRGB = findViewById(R.id.textRGB);
+        TextView mTextViewHSV = findViewById(R.id.textHSV);
 
         mAnalyzer = new ImageAnalyzer(mPreviewView, mTextViewColor, mTextViewRGB, mTextViewHSV, getBaseContext());
 
@@ -142,6 +145,10 @@ public class MainActivity extends AppCompatActivity implements OnRequestPermissi
                 ImageAnalysis imageAnalysis = builder
                         //set the resolution of the view
                         .setTargetResolution(new android.util.Size(1000, 1000))
+                        //set image format
+                        .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888)
+                        //set rotation
+                        .setOutputImageRotationEnabled(true)
                         //the executor receives the last available frame from the camera at the time that the analyze() method is called
                         .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).build();
                 //sets the analyzer

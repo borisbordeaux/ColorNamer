@@ -19,4 +19,5 @@
     <string name="gray">GRIS</string>
     <string name="white">BLANC</string>
     <string name="language">FR</string>
+    <string name="format_error">Format non supporté</string>
 </resources>
