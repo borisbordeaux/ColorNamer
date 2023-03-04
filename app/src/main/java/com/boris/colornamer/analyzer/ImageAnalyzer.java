@@ -2,7 +2,6 @@ package com.boris.colornamer.analyzer;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.ImageFormat;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -68,12 +67,6 @@ public class ImageAnalyzer implements ImageAnalysis.Analyzer {
      */
     @Override
     public void analyze(@NotNull ImageProxy image) {
-        if (image.getFormat() != ImageFormat.YUV_420_888) {
-            mTextViewColor.setText(mContext.getString(R.string.format_error));
-            image.close();
-            return;
-        }
-
         //avoid creation of Mat every frame
         if (rgb == null) rgb = new Mat(image.getWidth(), image.getHeight(), CvType.CV_8UC3);
 
